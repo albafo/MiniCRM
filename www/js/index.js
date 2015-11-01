@@ -18,14 +18,17 @@
  */
 
 var confDB = {
+
+    existe_db:null,
+    db:null,
     initialize: function() {
 
-        var existe_db;
+
         // Comprobacion de la existencia de la base de datos
-        existe_db = window.localStorage.getItem("existe_db");
+        this.existe_db = window.localStorage.getItem("existe_db");
+        this.db = openDatabase('miniCRM', '1.0', 'database for miniCRM', 2 * 1024 * 1024);
 
-
-        if (typeof existe_db == 'undefined' || existe_db == null)
+        if (typeof this.existe_db == 'undefined' || this.existe_db == null)
             this.confirmaCreacionBBDD()
     },
 
@@ -45,10 +48,7 @@ var confDB = {
 
     //genera la base de datos
     creaBBDD:function() {
-        //Simulamos generación de base de datos
-        window.localStorage.setItem("existe_db", 1);
-
-
+        this.db.transaction(this.throwDBcreation, this.onErrorTransaction, this.onSuccessTransaction);
     },
 
     //Maneja el resultado del dialogo de confirmación.
@@ -59,7 +59,44 @@ var confDB = {
         }
         else navigator.app.exitApp();
 
+    },
+
+    //Método que lanza las querys de creación y datos de ejemplo.
+    throwDBcreation:function(tx) {
+        tx.executeSql(
+            "CREATE TABLE IF NOT EXISTS usuarios ("+
+                "id INT PRIMARY KEY NOT NULL, "+
+                "nombre CHAR(255)  NOT NULL, "+
+                "telefono CHAR(50)  NOT NULL, "+
+                "email CHAR(100)  NOT NULL, "+
+                "puesto CHAR(20) NOT NULL, "+
+                "valoracion INT"+
+            ")"
+        );
+
+        tx.executeSql(
+            "INSERT INTO usuarios VALUES(1, 'Alvaro Baño Fos', '666666666', 'alvaro@alvaro.com', 'scrum', 5)"
+        );
+
+        tx.executeSql(
+            "INSERT INTO usuarios VALUES(2, 'Nacho Roca', '666666666', 'nacho@nacho.com', 'manager', 4)"
+        );
+
+    },
+
+    //Método que se lanza en caso de error de la transacción
+    onErrorTransaction:function(err) {
+        console.log("Error en la generación de la base de datos: " + err.message);
+    },
+
+    //Método que se lanza en caso de éxito de la transacción
+    onSuccessTransaction:function() {
+
+        console.log("Generada base de datos");
+        window.localStorage.setItem("existe_db", 1);
+
     }
+
 
 
 };
@@ -87,7 +124,6 @@ var app = {
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
-
         confDB.initialize();
     }
 };

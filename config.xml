@@ -11,7 +11,8 @@
     <plugin name="cordova-plugin-whitelist" version="1" />
     <plugin name="cordova-plugin-dialogs" />
     <plugin name="cordova-plugin-device"  />
-    <plugin name="cordova-plugin-console" />
+    <plugin name="cordova-plugin-console"  />
+
 
 
 
