@@ -4,12 +4,20 @@
 		<title>MiniCRM - by AlvaroBano</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
-		<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css" />
-		<link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.css" />
-		<link rel="stylesheet" href="/vendor/waves/waves.min.css" />
-		<link rel="stylesheet" href="/css/nativedroid2.css" />
+		<link rel="stylesheet" href="css/font-awesome.min.css" />
+		<link rel="stylesheet" href="css/jquery.mobile.min.css" />
+		<link rel="stylesheet" href="vendor/waves/waves.min.css" />
+		<link rel="stylesheet" href="vendor/wow/animate.css" />
+		<link rel="stylesheet" href="css/nativedroid2.css" />
+		<link rel="stylesheet" href="css/custom.css" />
 
-				<style>
+
+		<meta name="mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+
+
+		<style>
 					/* Prevent FOUC */
 					body { opacity: 0; }
 				</style>
@@ -23,51 +31,59 @@
 
 
 			<div data-role="header" data-position="fixed" class="wow fadeInDown" data-wow-delay="0.2s">
-				<a class="ui-btn-right" href="#"><img  class="profile-thumbnail" src="img/example-user.jpg" /></a>
+				<a class="ui-btn-right" href="#"><img id="profileImage"  class="profile-thumbnail" src="" /></a>
 				<a href="#leftpanel" class="ui-btn ui-btn-left wow fadeIn" data-wow-delay='0.8s'><i class="zmdi zmdi-menu"></i></a>
-				<h1 class="wow fadeIn" data-wow-delay='0.4s'>Ethel Chancy</h1>
+				<h1 class="wow fadeIn" data-wow-delay='0.4s' id="titleName"></h1>
 			</div>
 
-			<div role="main" class="ui-content" data-inset="false">
+			<div role="main" class="ui-content" data-inset="false" id="mainProfile">
 
 				<div class="row">
 					<div class="col-xs-3"><i class="fa fa-user"></i></div>
-					<div class="col-xs-9">Ethel Chancy</div>
+					<div class="col-xs-9" id="profileName"></div>
 				</div>
 				<hr>
 				<div class="row">
 					<div class="col-xs-3"><i class="fa fa-envelope"></i></div>
-					<div class="col-xs-9">email@email.com</div>
+					<div class="col-xs-9" id="profileEmail"></div>
 				</div>
 				<hr>
 				<div class="row">
 					<div class="col-xs-3"><i class="fa fa-phone"></i></div>
-					<div class="col-xs-9">(+34) 666.666.666</div>
+					<div class="col-xs-9" id="profilePhone"></div>
 				</div>
 				<hr>
 				<div class="row">
 					<div class="col-xs-3"><i class="fa fa-users"></i></div>
-					<div class="col-xs-9">SCRUM Manager</div>
+					<div class="col-xs-9" id="profileEmployment"></div>
 				</div>
 				<hr>
 				<div class="row">
 					<div class="col-xs-3"><i class="fa fa-star"></i></div>
-					<div class="col-xs-9">4,5/5</div>
+					<div class="col-xs-9" id="profileValoration"></div>
 				</div>
 				<hr>
-				<a class="ui-btn clr-primary" href="editar.html"><i class="zmdi zmdi-edit"></i> Editar</a>
+				<a class="ui-btn clr-primary" href="editar.html" data-ajax="false"><i class="zmdi zmdi-edit"></i> Editar</a>
 				<button class="ui-btn clr-warning"><i class="zmdi zmdi-delete"></i> Borrar</button>
 
 			</div>
 
 		</div>
 
-		<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-		<script src="//code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
-		<script src="//ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.js"></script>
-		<script src="/vendor/waves/waves.min.js"></script>
-		<script src="/js/nativedroid2.js"></script>
-		<script src="/nd2settings.js"></script>
+		<script src="js/jquery.min.js"></script>
+		<script src="js/jquery-ui.min.js"></script>
+		<script src="js/jquery.mobile.min.js"></script>
+		<script type="text/javascript" src="cordova.js"></script>
+		<script type="text/javascript" src="js/index.js"></script>
+		<script type="text/javascript" src="js/muestraResultados.js"></script>
+		<script src="vendor/waves/waves.min.js"></script>
+		<script src="vendor/wow/wow.min.js"></script>
+		<script src="js/nativedroid2.js"></script>
+		<script src="nd2settings.js"></script>
+		<script>
 
+			muestraResultados.initialize();
+			muestraResultados.mostrarPerfil();
+		</script>
 	</body>
 </html>

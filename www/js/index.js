@@ -75,12 +75,13 @@ var confDB = {
         );
 
         tx.executeSql(
-            "INSERT INTO usuarios VALUES(1, 'Alvaro Baño Fos', '666666666', 'alvaro@alvaro.com', 'scrum', 5)"
+            "INSERT INTO usuarios VALUES(1, 'Alvaro Baño Fos', '666666666', 'alvaro@alvaro.com', 'Scrum Manager', 5)"
         );
 
         tx.executeSql(
-            "INSERT INTO usuarios VALUES(2, 'Nacho Roca', '666666666', 'nacho@nacho.com', 'manager', 4)"
+            "INSERT INTO usuarios VALUES(2, 'Nacho Roca', '666666666', 'nacho@nacho.com', 'Project Manager', 4)"
         );
+
 
     },
 
@@ -94,6 +95,9 @@ var confDB = {
 
         console.log("Generada base de datos");
         window.localStorage.setItem("existe_db", 1);
+        muestraResultados.initialize();
+        muestraResultados.mostrarListado();
+
 
     }
 
@@ -125,7 +129,39 @@ var app = {
     // Update DOM on a Received Event
     receivedEvent: function(id) {
         confDB.initialize();
+    },
+
+    getCamera:function(imgDOM) {
+        navigator.camera.getPicture(function(imageURI){
+            alert(imageURI);
+            imgDOM.attr('src', imageURI).enhanceWithin();
+            app.moveCameraFile(imageURI);
+        }, function(){}, { quality: 50,
+            destinationType: Camera.DestinationType.FILE_URI });
+    },
+
+    moveCameraFile:function(fileUri) {
+
+        window.resolveLocalFileSystemURL(
+            fileUri,
+            function(fileEntry){
+                newFileUri  = cordova.file.dataDirectory + "img/";
+                oldFileUri  = fileUri;
+                fileExt     = "." + oldFileUri.split('.').pop();
+
+                newFileName = guid("car") + fileExt;
+
+                window.resolveLocalFileSystemURL(newFileUri,
+                    function(dirEntry) {
+                        // move the file to a new directory and rename it
+                        fileEntry.moveTo(dirEntry, newFileName, function(){}, function(){});
+                    },
+                    function(){});
+            },
+            function(){});
     }
+
+
 };
 
 app.initialize();

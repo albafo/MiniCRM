@@ -31,9 +31,9 @@
 			</div>
 
 
-			<div role="main" class="ui-content wow fadeIn" data-inset="false" data-wow-delay="0.2s">
+			<div role="main" class="ui-content wow fadeIn" data-inset="false" data-wow-delay="0.2s" id="UsersList">
 
-			<ul data-role="listview" data-icon="false">
+			<ul data-role="listview" data-icon="false" >
 
 				<li>
 					<a href="profile.html">
@@ -66,12 +66,12 @@
 				</li>
 			</ul>
 
-			<hr />
 
 
 
 
 			</div>
+
 
 		</div>
 
@@ -80,10 +80,15 @@
 		<script src="js/jquery.mobile.min.js"></script>
 		<script type="text/javascript" src="cordova.js"></script>
 		<script type="text/javascript" src="js/index.js"></script>
+		<script type="text/javascript" src="js/muestraResultados.js"></script>
 		<script src="vendor/waves/waves.min.js"></script>
 		<script src="vendor/wow/wow.min.js"></script>
 		<script src="js/nativedroid2.js"></script>
 		<script src="nd2settings.js"></script>
+		<script>
+			muestraResultados.initialize();
+			muestraResultados.mostrarListado();
+		</script>
 
 	</body>
 </html>
