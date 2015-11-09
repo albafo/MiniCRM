@@ -31,8 +31,8 @@
 
 
 			<div data-role="header" data-position="fixed" class="wow fadeInDown" data-wow-delay="0.2s">
-				<a class="ui-btn-right" href="#"><img id="profileImage"  class="profile-thumbnail" src="" /></a>
-				<a href="#leftpanel" class="ui-btn ui-btn-left wow fadeIn" data-wow-delay='0.8s'><i class="zmdi zmdi-menu"></i></a>
+				<a data-transition="slide" class="ui-btn-right" href="#"><img id="profileImage"  class="profile-thumbnail" src="" /></a>
+				<a data-transition="slide" href="#leftpanel" class="ui-btn ui-btn-left wow fadeIn" data-wow-delay='0.8s'><i class="zmdi zmdi-menu"></i></a>
 				<h1 class="wow fadeIn" data-wow-delay='0.4s' id="titleName"></h1>
 			</div>
 
@@ -63,8 +63,8 @@
 					<div class="col-xs-9" id="profileValoration"></div>
 				</div>
 				<hr>
-				<a class="ui-btn clr-primary" href="editar.html" data-ajax="false"><i class="zmdi zmdi-edit"></i> Editar</a>
-				<button class="ui-btn clr-warning"><i class="zmdi zmdi-delete"></i> Borrar</button>
+				<a data-transition="slide" class="ui-btn clr-primary" href="editar.html" data-ajax="false"><i class="zmdi zmdi-edit"></i> Editar</a>
+				<button class="ui-btn clr-warning" id="deleteMember"><i class="zmdi zmdi-delete"></i> Borrar</button>
 
 			</div>
 
@@ -76,6 +76,7 @@
 		<script type="text/javascript" src="cordova.js"></script>
 		<script type="text/javascript" src="js/index.js"></script>
 		<script type="text/javascript" src="js/muestraResultados.js"></script>
+		<script type="text/javascript" src="js/delete.js"></script>
 		<script src="vendor/waves/waves.min.js"></script>
 		<script src="vendor/wow/wow.min.js"></script>
 		<script src="js/nativedroid2.js"></script>

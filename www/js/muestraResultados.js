@@ -38,8 +38,8 @@ var muestraResultados = {
             {
                 var item = result.rows.item(i);
                 html += '<li>\
-                    <a href="profile.html" data-ajax="false" class="linkToProfile" data-id="'+item.id+'">\
-                        <img src="img/user_'+item.id+'.jpg"  class="ui-thumbnail ui-thumbnail-circular" />\
+                    <a data-transition="slide" href="profile.html" data-ajax="false" class="linkToProfile" data-id="'+item.id+'">\
+                        <img src="'+item.img+'"  class="ui-thumbnail ui-thumbnail-circular" />\
                         <h2>'+item.nombre+'</h2>\
                         <p>'+item.puesto+'</p>\
                     </a>\
@@ -47,6 +47,10 @@ var muestraResultados = {
                 $('#UsersList').html('<ul data-role="listview" data-icon="false" id="UsersList">'+html+'</ul><hr/>').enhanceWithin();
 
             }
+        }
+
+        else {
+            $('#UsersList').html('<a data-transition="slide" href="nuevo.html" data-ajax="false" class="ui-btn ui-btn-raised clr-primary">Añade un miembro</a>');
         }
 
         $('body').on('click', '#UsersList a', function() {
@@ -87,17 +91,20 @@ var muestraResultados = {
             $('#profileEmail').text(item.email);
             $('#profilePhone').text(item.telefono);
             $('#profileEmployment').text(item.puesto);
-            $('#profileValoration').text(item.valoracion+'/5');
+
+            if(item.valoracion == null)
+                $('#profileValoration').text('?/5');
+            else  $('#profileValoration').text(item.valoracion+'/5');
+
             $('#titleName').text(item.nombre);
-            var img = 'img/user_'+item.id+'.jpg';
-            $('#profileImage').attr('src', img);
+            $('#profileImage').attr('src', item.img);
         }
     },
 
     rellenarForm:function() {
         this.db.transaction(this.throwFillForm, confDB.onErrorTransaction);
         $('body').on('click', 'a#changePhoto', function() {
-            app.getCamera($(this).find('img'));
+            app.getCamera($(this).find('img'),  $('#formSrc'));
         });
     },
 
@@ -123,8 +130,8 @@ var muestraResultados = {
             $('#formEmployment').val(item.puesto).selectmenu('refresh');
             $('#formValoration').val(item.valoracion);
             $('#formValoration').slider('refresh');
-            var img = 'img/user_'+item.id+'.jpg';
-            $('#profileImage').attr('src', img).enhanceWithin();
+            $('#profileImage').attr('src', item.img).enhanceWithin();
+            $('#formSrc').val(item.img);
 
         }
     }

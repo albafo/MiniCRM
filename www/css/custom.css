@@ -5,6 +5,10 @@
     height: 55px;
 }
 .ui-header a .profile-thumbnail {
-    border-radius: 50% !important;
+
     width: 100%;
+}
+
+.icon-camera {
+    margin-top: 17px;
 }

@@ -65,29 +65,24 @@ var confDB = {
     throwDBcreation:function(tx) {
         tx.executeSql(
             "CREATE TABLE IF NOT EXISTS usuarios ("+
-                "id INT PRIMARY KEY NOT NULL, "+
+                "id INTEGER PRIMARY KEY AUTOINCREMENT, "+
                 "nombre CHAR(255)  NOT NULL, "+
                 "telefono CHAR(50)  NOT NULL, "+
                 "email CHAR(100)  NOT NULL, "+
                 "puesto CHAR(20) NOT NULL, "+
-                "valoracion INT"+
+                "valoracion INT,"+
+                "img CHAR(255)"+
             ")"
         );
 
-        tx.executeSql(
-            "INSERT INTO usuarios VALUES(1, 'Alvaro Baño Fos', '666666666', 'alvaro@alvaro.com', 'Scrum Manager', 5)"
-        );
 
-        tx.executeSql(
-            "INSERT INTO usuarios VALUES(2, 'Nacho Roca', '666666666', 'nacho@nacho.com', 'Project Manager', 4)"
-        );
 
 
     },
 
     //Método que se lanza en caso de error de la transacción
     onErrorTransaction:function(err) {
-        console.log("Error en la generación de la base de datos: " + err.message);
+        console.log("Error en la base de datos: " + err.message);
     },
 
     //Método que se lanza en caso de éxito de la transacción
@@ -131,34 +126,12 @@ var app = {
         confDB.initialize();
     },
 
-    getCamera:function(imgDOM) {
+    getCamera:function(imgDOM, hiddenDOM) {
         navigator.camera.getPicture(function(imageURI){
-            alert(imageURI);
             imgDOM.attr('src', imageURI).enhanceWithin();
-            app.moveCameraFile(imageURI);
+            hiddenDOM.val(imageURI);
         }, function(){}, { quality: 50,
             destinationType: Camera.DestinationType.FILE_URI });
-    },
-
-    moveCameraFile:function(fileUri) {
-
-        window.resolveLocalFileSystemURL(
-            fileUri,
-            function(fileEntry){
-                newFileUri  = cordova.file.dataDirectory + "img/";
-                oldFileUri  = fileUri;
-                fileExt     = "." + oldFileUri.split('.').pop();
-
-                newFileName = guid("car") + fileExt;
-
-                window.resolveLocalFileSystemURL(newFileUri,
-                    function(dirEntry) {
-                        // move the file to a new directory and rename it
-                        fileEntry.moveTo(dirEntry, newFileName, function(){}, function(){});
-                    },
-                    function(){});
-            },
-            function(){});
     }
 
 
